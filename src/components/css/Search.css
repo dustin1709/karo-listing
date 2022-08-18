@@ -1,0 +1,10 @@
+.dropdown {
+    border-radius: 10px;
+    border: 1px solid #CCCC;
+    padding: 0.5em;
+}
+@media screen and (max-width: 1022px) {
+    .dropdown {
+        height: 50px;
+    }
+}

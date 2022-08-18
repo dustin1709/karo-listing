@@ -1,24 +1,22 @@
 import React from 'react';
 
-import Image from '../assets/img/house-banner.png';
+import Image from '../assets/img/background.jpg';
 import Search from '../components/Search';
 
 const Banner = () => {
   return (
-    <section className='h-full max-h-[640px] mb-8 xl:mb-24'>
+    <section className='h-full max-h-[600px] mb-0 xl:mb-24'>
       <div className='flex flex-col lg:flex-row'>
-        <div className='lg:ml-8 xl:ml-[135px] flex flex-col items-center lg:items-start text-center lg:text-left justify-center flex-1 px-4 lg:px-0'>
-          <h1 className='text-4xl lg:text-[58px] font-semibold leading-none mb-6'>
-            <span className='text-violet-700'>Rent</span> Your Dream House With
-            Us.
+        <div className='lg:ml-8 xl:ml-[100px] flex flex-col items-center lg:items-start text-center lg:text-left justify-center flex-1 px-4 lg:px-0'>
+          <h1 className='text-4xl lg:text-[58px] leading-none mb-6'>
+            Tìm nhà ưng ý qua <span className='text-red-800'>Karo Homes</span>.
           </h1>
           <p className='max-w-[480px] mb-8'>
-            Powerful, self-serve product and growth analytics to help you
-            convert, engage, and retain more.
+            Thông tin chính xác, đảm bảo giấy tờ pháp lý, nhanh, và tiện lợi.
           </p>
         </div>
         <div className='hidden flex-1 lg:flex justify-end items-end'>
-          <img src={Image} alt='' />
+          <img src={Image} alt='' style={{borderRadius: '10em 0 0 0', opacity: '0.8'}} />
         </div>
       </div>
       <Search />

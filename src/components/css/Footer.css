@@ -1,0 +1,17 @@
+#title {
+    float: left;
+}
+#title img {
+    float: left;
+    height: 2em;
+    vertical-align: middle;
+}
+
+#h1-login {
+    float: right;
+    font-size: 150%;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-left: 0.25em;
+    color: var(--logo-color);
+}
