@@ -33,8 +33,8 @@ const Search = () => {
     <form className='px-[30px] py-6 max-w-[1170px] mx-auto flex flex-col lg:flex-row justify-between gap-4 lg:gap-x-3 relative lg:-top-4 lg:shadow-1 bg-white lg:bg-transparent lg:backdrop-blur rounded-lg'>
       
       <select className="dropdown" aria-label=".form-select-lg">
-        <option value="0">Mua</option>
-        <option value="0">Thuê</option>
+        <option value="1">Mua</option>
+        <option value="2">Thuê</option>
       </select>
 
       <select onChange={changeSelectOptionHandler}  className="dropdown" aria-label=".form-select-lg">
@@ -52,9 +52,9 @@ const Search = () => {
       </select>
 
       <select className="dropdown" aria-label=".form-select-lg">
-        <option value="0">Nhà Phố</option>
-        <option value="0">Chung Cư</option>
-        <option value="0">Đất nền</option>
+        <option value="1">Nhà Phố</option>
+        <option value="2">Chung Cư</option>
+        <option value="4">Đất nền</option>
       </select>
 
       <button type='submit'

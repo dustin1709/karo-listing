@@ -1,4 +1,3 @@
-
 export default function Cities() {
     return [
         {
@@ -110,35 +109,35 @@ export default function Cities() {
             id: 16,
             name: "Bình Thuận",
             dist: [
-
+                "Bắc Bình", "Đảo Phú Quý", "Đức Linh", "Hàm Tân", "Hàm Thuận Bắc", "Hàm Thuận Nam", "Tánh Linh", "Tuy Phong", "Phan Thiết", "La Gi"
             ]
         }, 
         {
             id: 17,
             name: "Cà Mau",
             dist: [
-
+                "Cái Nước", "Đầm Dơi", "Năm Căn", "Ngọc Hiển", "Phú Tân", "Thới Bình", "Trần Văn Thời", "U Minh", "Cà Mau"
             ]
         }, 
         {
             id: 18,
             name: "Cần Thơ",
             dist: [
-
+                "Cờ Đỏ", "Phong Điền", "Thốt Nốt", "Vĩnh Thạnh", "Bình Thủy", "Cái Răng", "Ninh Kiều", "Ô Môn", "Thới Lai"
             ]
         }, 
         {
             id: 19,
             name: "Cao Bằng",
             dist: [
-
+                "Bảo Lạc", "Bảo Lâm", "Hạ Lang", "Hà Quảng", "Hòa An", "Nguyên Bình", "Phục Hòa", "Quảng Uyên", "Thạch An", "Thông Nông", "Trà Lĩnh", "Trùng Khánh", "Cao Bằng"
             ]
         }, 
         {
             id: 20,
             name: "Đắk Lắk",
             dist: [
-
+                "Buôn Đôn", "Cư Kuin", "Cư M'gar", "Ea H'Leo", "Ea Kar", "Ea Súp", "Krông Ana", "Krông Bông", "Krông Buk", "Krông Năng", "Krông Pắc", "Lăk", "M'Đrăk", "Buôn Ma Thuột", "Buôn Hồ"
             ]
         }, 
         {
@@ -327,28 +326,119 @@ export default function Cities() {
             id: 47,
             name: "Quảng Nam",
             dist: [
-                
+                "Bắc Trà My", "Đại Lộc", "Điện Bàn", "Đông Giang", "Duy Xuyên", "Hiệp Đức", "Nam Giang", "Nam Trà My", "Núi Thành", "Phú Ninh", "Phước Sơn", "Quế Sơn", "Tây Giang", "Thăng Bình", "Tiên Phước", "Tam Kỳ", "Hội An", "Nông Sơn"
             ]
         },
         {
             id: 48,
             name: "Quảng Ngãi",
             dist: [
-                
+                "Ba Tơ", "Bình Sơn", "Đức Phổ", "Lý Sơn", "Minh Long", "Mộ Đức", "Nghĩa Hành", "Sơn Hà", "Sơn Tây", "Sơn Tịnh", "Tây Trà", "Trà Bồng", "Tư Nghĩa", "Quảng Ngãi"
             ]
         },
         {
             id: 49,
             name: "Quảng Ninh",
             dist: [
-                
+                "Ba Chẽ", "Bình Liêu", "Cô Tô", "Đầm Hà", "Đông Triều", "Hải Hà", "Hoành Bồ", "Tiên Yên", "Vân Đồn", "Hạ Long", "Cẩm Phả", "Móng Cái", "Uông Bí", "Quảng Yên"
             ]
         },
         {
             id: 50,
             name: "Quảng Trị",
             dist: [
+                "Cam Lộ", "Đăk Rông", "Đảo Cồn Cỏ", "Gio Linh", "Hải Lăng", "Hướng Hóa", "Triệu Phong", "Vĩnh Linh", "Đông Hà", "Quảng Trị"
+            ]
+        },
+        {
+            id: 51,
+            name: "Sóc Trăng",
+            dist: [
                 
+            ]
+        },
+        {
+            id: 52,
+            name: "Sơn La",
+            dist: [
+                
+            ]
+        },
+        {
+            id: 53,
+            name: "Tây Ninh",
+            dist: [
+                
+            ]
+        },
+        {
+            id: 54,
+            name: "Thái Bình",
+            dist: [
+                
+            ]
+        },
+        {
+            id: 55,
+            name: "Thái Nguyên",
+            dist: [
+                
+            ]
+        },
+        {
+            id: 56,
+            name: "Thanh Hóa",
+            dist: [
+                
+            ]
+        },
+        {
+            id: 57,
+            name: "Thừa Thiên Huế",
+            dist: [
+                
+            ]
+        },
+        {
+            id: 58,
+            name: "Tiền Giang",
+            dist: [
+                
+            ]
+        },
+        {
+            id: 59,
+            name: "Trà Vinh",
+            dist: [
+                
+            ]
+        },
+        {
+            id: 60,
+            name: "Tuyên Quang",
+            dist: [
+                
+            ]
+        },
+        {
+            id: 61,
+            name: "Vĩnh Long",
+            dist: [
+                
+            ]
+        },
+        {
+            id: 62,
+            name: "Vĩnh Phúc",
+            dist: [
+                
+            ]
+        },
+        {
+            id: 63,
+            name: "Yên Bái",
+            dist: [
+                "Lục Yên", "Mù Cang Chải", "Trạm Tấu", "Trấn Yên", "Văn Chấn", "Văn Yên", "Yên Bình", "Yên Bái", "Nghĩa Lộ"
             ]
         }
     ];
