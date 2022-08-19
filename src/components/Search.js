@@ -1,6 +1,7 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
 import Cities from "./hooks/Cities";
 import './css/Search.css';
+import axios from 'axios';
 // import context
 import { HouseContext } from './HouseContext';
 
@@ -18,9 +19,19 @@ const Search = () => {
   const changeSelectOptionHandler = (e) => {
       selectedCity.current = e.target.value;
       setCity(e.target.value);
-      let districts = cities[selectedCity.current-1].dist;
-      setListDistrict(districts);
-      console.log("User choose city: " + selectedCity.current + ". The districts are: " + districts);
+      let data = new FormData();
+      data.append('city', selectedCity.current);
+      let config = {
+        method: 'post',
+        url: 'https://lab.karo.land/api/post/districtlist',
+        data: data
+      };
+      axios(config).then(function (response) {
+        setListDistrict(response.data.district);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
   useEffect(() => {
       if (selectedCity.current === 1) {
@@ -47,7 +58,7 @@ const Search = () => {
 
       <select onChange={(e) => setDist(e.target.value)} className="dropdown" aria-label=".form-select-lg">
           {
-              listDistrict.map((district, index) => <option value={index+1}>{district}</option>)
+              listDistrict.map((district) => <option value={district.id}>{district.name}</option>)
           }
       </select>
 
