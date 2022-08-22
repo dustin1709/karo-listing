@@ -19,8 +19,7 @@ const HouseContextProvider = ({ children }) => {
       data: data
     };
     axios(config).then(function (response) {
-      console.log("hello");
-      console.log(JSON.stringify(response.data));
+      //console.log(JSON.stringify(response.data));
       setHouses(response.data.collection);
     }).catch(function (error) {
       console.log(error);

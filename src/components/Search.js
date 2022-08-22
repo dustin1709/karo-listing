@@ -15,11 +15,11 @@ const Search = () => {
 
   const cities = Cities();
   const selectedCity = useRef(1);
-  const [listDistrict, setListDistrict] = useState([]);    
+  const [listDistrict, setListDistrict] = useState([]);  
+  let data = new FormData();  
   const changeSelectOptionHandler = (e) => {
       selectedCity.current = e.target.value;
       setCity(e.target.value);
-      let data = new FormData();
       data.append('city', selectedCity.current);
       let config = {
         method: 'post',
@@ -34,10 +34,18 @@ const Search = () => {
       });
   };
   useEffect(() => {
-      if (selectedCity.current === 1) {
-          let districts = cities[0].dist;
-          setListDistrict(districts);
-      }
+    data.append('city', 1);
+    let config = {
+      method: 'post',
+      url: 'https://lab.karo.land/api/post/districtlist',
+      data: data
+    };
+    axios(config).then(function (response) {
+      setListDistrict(response.data.district);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }, []);
 
   return (
