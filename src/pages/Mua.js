@@ -1,9 +1,73 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import House2 from '../components/House2';
+import Cities from "../components/hooks/Cities";
 
 const Mua = ({ houses, search, setSearch }) => {
+    const [city, setCity] = useState(0);
+    const [dist, setDist] = useState(0);
+    const [type, setType] = useState(0);
+
+    const cities = Cities();
+    const selectedCity = useRef(1);
+    const [listDistrict, setListDistrict] = useState([]);
+
+    const changeSelectOptionHandler = (e) => {
+        selectedCity.current = e.target.value;
+        setCity(e.target.value);
+        let data = new FormData();
+        data.append('city', selectedCity.current);
+        let config = {
+          method: 'post',
+          url: 'https://lab.karo.land/api/post/districtlist',
+          data: data
+        };
+        axios(config).then(function (response) {
+          setListDistrict(response.data.district);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
+
+    useEffect(() => {
+      let data = new FormData();
+      data.append('city', 1);
+      let config = {
+        method: 'post',
+        url: 'https://lab.karo.land/api/post/districtlist',
+        data: data
+      };
+      axios(config).then(function (response) {
+        setListDistrict(response.data.district);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }, []);
+
+    const filter = async (e) => {
+      e.preventDefault();
+      let data = new FormData();
+      data.append('post_type', '1');
+      data.append('property_type', type);
+      data.append('city', city);
+      data.append('district', dist);
+      data.append('limit', '100');
+      data.append('offset', '0');
+      let config = {
+        method: 'post',
+        url: 'https://lab.karo.land/api/post/listfilter',
+        data: data
+      };
+      axios(config).then(function (response) {
+        console.log(response.data.collection);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
 
     return (
         <>
@@ -17,7 +81,7 @@ const Mua = ({ houses, search, setSearch }) => {
               </div>
               <input type="text" 
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                placeholder="Gõ từ khóa"
+                placeholder="Tìm kiếm theo từ khóa"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)} />
           </div>
@@ -25,19 +89,49 @@ const Mua = ({ houses, search, setSearch }) => {
               <svg aria-hidden="true" className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
           </button>
         </form>
+
+        <h5 className="mt-2">Chọn theo tỉnh thành, loại nhà:</h5>
+        <form className='mx-auto flex flex-col lg:flex-row justify-between mt-1' onSubmit={filter}>
+        
+          <select onChange={changeSelectOptionHandler}  className="dropdown" aria-label=".form-select-lg">
+              {
+                  cities.map(c => (
+                      <option value={c.id}>{c.name}</option>
+                  ))
+              }
+          </select>
+
+          <select onChange={(e) => setDist(e.target.value)} className="dropdown" aria-label=".form-select-lg">
+              {
+                  listDistrict.map((district) => <option value={district.id}>{district.name}</option>)
+              }
+          </select>
+
+          <select onChange={(e) => setType(e.target.value)} className="dropdown" aria-label=".form-select-lg">
+            <option value="1">Nhà Phố</option>
+            <option value="2">Chung Cư</option>
+            <option value="4">Đất nền</option>
+          </select>
+
+          <button type='submit'
+            className='bg-red-700 text-white py-2.5 px-2 rounded-lg'
+          >
+            Filter
+          </button>
+        </form>
+
             {houses.map((house, index) => {
                 return (
                   <>
                     {
-                      house.type === 1 ?
                       <Link to={`/property/${house.id}`} key={index}>
                         <House2 house={house} />
                       </Link>
-                      : <></>
                     }
                   </>
                 );
             })}
+          
         </div>
         </section>
         </>

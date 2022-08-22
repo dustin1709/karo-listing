@@ -48,6 +48,29 @@ const Search = () => {
     });
   }, []);
 
+  const filter = () => {
+    // let data = new FormData();
+    // data.append('post_type', '1');
+    // data.append('property_type', type);
+    // data.append('city', city);
+    // data.append('district', dist);
+    // data.append('limit', '100');
+    // data.append('offset', '0');
+    // let config = {
+    //   method: 'post',
+    //   url: 'https://lab.karo.land/api/post/listfilter',
+    //   data: data
+    // };
+    // axios(config).then(function (response) {
+    //   console.log(response.data.collection);
+    //   setErrCode(response.data.error_code);
+    //   setHouseList(response.data.collection);
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    // });
+  }
+
   return (
     <form className='px-[30px] py-6 max-w-[1170px] mx-auto flex flex-col lg:flex-row justify-between gap-4 lg:gap-x-3 relative lg:-top-4 lg:shadow-1 bg-white lg:bg-transparent lg:backdrop-blur rounded-lg'>
       
