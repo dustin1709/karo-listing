@@ -94,7 +94,7 @@ const Thue = () => {
     const filter = async (e) => {
       e.preventDefault();
       let data = new FormData();
-      data.append('post_type', '1');
+      data.append('post_type', '2');
       data.append('property_type', type.toString());
       data.append('city', city.toString());
       data.append('district', dist.toString());
