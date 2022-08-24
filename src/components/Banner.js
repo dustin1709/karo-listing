@@ -1,11 +1,12 @@
 import React from 'react';
 
-import Image from '../assets/img/background.jpg';
+import Image from '../assets/img/background.png';
 import Search from '../components/Search';
+
 
 const Banner = () => {
   return (
-    <section className='h-full max-h-[600px] mb-0 xl:mb-24'>
+    <section className='h-full max-h-[600px] mb-0 xl:mb-10'>
       <div className='flex flex-col lg:flex-row'>
         <div className='lg:ml-8 xl:ml-[100px] flex flex-col items-center lg:items-start text-center lg:text-left justify-center flex-1 px-4 lg:px-0'>
           <h1 className='text-4xl lg:text-[58px] leading-none mb-6'>
@@ -16,7 +17,7 @@ const Banner = () => {
           </p>
         </div>
         <div className='hidden flex-1 lg:flex justify-end items-end'>
-          <img src={Image} alt='' style={{borderRadius: '10em 0 0 0', opacity: '0.8'}} />
+          <img src={Image} alt='' style={{borderRadius: '30px 0 0 0', opacity: '0.9'}} />
         </div>
       </div>
       <Search />

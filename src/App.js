@@ -8,6 +8,7 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import Mua from './pages/Mua';
 import PropertyDetails from './pages/PropertyDetails';
+import Thue from './pages/Thue';
 
 const App = () => {
 
@@ -18,6 +19,7 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/property/:id' element={<PropertyDetails />} />
         <Route path='/mua' element={<Mua />} />
+        <Route path='/thue' element={<Thue />} />
       </Routes>
       <Footer />
     </div>

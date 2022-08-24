@@ -66,9 +66,9 @@ const Mua = () => {
         axios(config).then(function (response) {
           // console.log(JSON.stringify(response.data));
           const houselist = response.data.collection;
-          let hlist = []
+          let hlist = [];
           houselist.map((house) => {
-            if(house.type !== 4) {hlist.push(house)}
+            if(house.type !== 4 && house.type !== 2) {hlist.push(house)}
           })
           setHouses(hlist);
           setIsloading(false);
@@ -122,7 +122,7 @@ const Mua = () => {
         <>
         <section className='mb-20'>
         <div className='container mx-auto'>
-        
+        <h1 className="mb-2 font-semibold text-red-800 text-[20px]">Tìm mua nhà</h1>
         <form className="flex items-center" onSubmit={(e) => e.preventDefault()}>
           <div className="relative w-full">
               <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">

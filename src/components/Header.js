@@ -17,7 +17,7 @@ const Header = () => {
             Mua
           </Link>
           <Link
-            className='hover:text-red-800 transition' to='/'>
+            className='hover:text-red-800 transition' to='/thue'>
             Thuê
           </Link>
         </div>
