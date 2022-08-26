@@ -67,7 +67,7 @@ const Thue = () => {
           const houselist = response.data.collection;
           let hlist = [];
           houselist.map((house) => {
-            if(house.type == 2) {hlist.push(house)}
+            if(house.type === 2) {hlist.push(house)}
           })
           setHouses(hlist);
           setIsloading(false);

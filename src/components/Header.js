@@ -20,6 +20,10 @@ const Header = () => {
             className='hover:text-red-800 transition' to='/thue'>
             Thuê
           </Link>
+          <Link
+            className='hover:text-red-800 transition' to='/request'>
+            Nhu cầu
+          </Link>
         </div>
       </div>
     </header>

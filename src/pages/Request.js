@@ -5,13 +5,12 @@ import House2 from '../components/House2';
 import Cities from "../components/hooks/Cities";
 import "../components/css/loader.css";
 
-const Mua = () => {
+const Request = () => {
     const [city, setCity] = useState(0);
     const [dist, setDist] = useState(0);
     const [type, setType] = useState(0);
     const [isloading, setIsloading] = useState(true);
-    const lim = useRef(200);
-    const [limit, setLimit] = useState(200);
+
     const cities = Cities();
     const selectedCity = useRef(1);
     const [listDistrict, setListDistrict] = useState([]);
@@ -57,7 +56,7 @@ const Mua = () => {
     useEffect(() => {
       const loadData = async () => {
         let data = new FormData();
-        data.append('limit', lim.current);
+        data.append('limit', '100');
         data.append('offset', '0');
         let config = {
           method: 'post',
@@ -65,11 +64,10 @@ const Mua = () => {
           data: data
         };
         axios(config).then(function (response) {
-          // console.log(JSON.stringify(response.data));
           const houselist = response.data.collection;
           let hlist = [];
           houselist.map((house) => {
-            if(house.type !== 4 && house.type !== 2) {hlist.push(house)}
+            if(house.type === 4) {hlist.push(house)}
           })
           setHouses(hlist);
           setIsloading(false);
@@ -90,17 +88,17 @@ const Mua = () => {
         || (house.description || "").toLowerCase().includes(search.toLowerCase())
       );
 
-      setSearchResults(filteredResults);
+      setSearchResults(filteredResults.reverse());
     }, [houses, search]);
 
     const filter = async (e) => {
       e.preventDefault();
       let data = new FormData();
-      data.append('post_type', '1');
+      data.append('post_type', '4');
       data.append('property_type', type.toString());
       data.append('city', city.toString());
       data.append('district', dist.toString());
-      data.append('limit', '200');
+      data.append('limit', '100');
       data.append('offset', '0');
       // for (let pair of data.entries()) {
       //   console.log(pair[0]+ ', ' + pair[1]); 
@@ -119,38 +117,11 @@ const Mua = () => {
       });
     }
 
-    const changeLimit = async (e) => {
-        e.preventDefault();
-        setIsloading(true);
-        let data = new FormData();
-        lim.current = e.target.value;
-        setLimit(e.target.value);
-        data.append('limit', lim.current);
-        data.append('offset', '0');
-        let config = {
-          method: 'post',
-          url: 'https://lab.karo.land/api/post/listall',
-          data: data
-        };
-        axios(config).then(function (response) {
-          const houselist = response.data.collection;
-          let hlist = [];
-          houselist.map((house) => {
-            if(house.type !== 4 && house.type !== 2) {hlist.push(house)}
-          })
-          setHouses(hlist.reverse());
-          console.log(hlist.length);
-          setIsloading(false);
-        }).catch(function (error) {
-          console.log(error);
-        })
-    };
-
     return (
         <>
         <section className='mb-20'>
         <div className='container mx-auto'>
-        <h1 className="mb-2 font-semibold text-red-800 text-[20px]">Tìm mua nhà</h1>
+        <h1 className="mb-2 font-semibold text-red-800 text-[20px]">Tìm thuê nhà</h1>
         <form className="flex items-center" onSubmit={(e) => e.preventDefault()}>
           <div className="relative w-full">
               <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -202,18 +173,6 @@ const Mua = () => {
           </button>
         </form>
 
-        <div>
-          <label className="mr-2">Đang hiển thị {limit} kết quả</label>
-          <select onChange={changeLimit} className="dropdown p-2 mb-1" aria-label=".form-select-lg">
-              <option value="100">100</option>
-              <option value="200" selected>200</option>
-              <option value="300">300</option>
-              <option value="500">500</option>
-              <option value="800">800</option>
-              <option value="1000">1000</option>
-          </select>
-        </div>
-
             {
               !isloading ?
               searchResults.map((house, index) => {
@@ -239,4 +198,4 @@ const Mua = () => {
     );
 }
 
-export default Mua;
+export default Request;
