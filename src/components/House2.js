@@ -48,10 +48,11 @@ const House2 = ({ house }) => {
         </div>
         <div className='text-lg text-gray-800 mb-1' style={{width: '80%', display: 'grid', gridTemplateColumns: '10% 90%'}}>
             <img className='avatar' src={'https://lab.karo.land/' + house.broker.avatar} alt='' />
-            <div>{house.broker.fullname}</div>
-        </div>
-        <div className='text-lg text-gray-800 mb-4'>
-            Phone: {house.broker.phone}
+            <div className='font-semibold'>
+              {house.broker.fullname}
+              <br />
+              Phone: {house.broker.phone}
+            </div>
         </div>
       </div>
     </div>

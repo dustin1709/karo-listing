@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import House2 from '../components/House2';
+import Post from '../components/Post';
 import Cities from "../components/hooks/Cities";
 import "../components/css/loader.css";
 
@@ -91,32 +91,6 @@ const Request = () => {
       setSearchResults(filteredResults.reverse());
     }, [houses, search]);
 
-    const filter = async (e) => {
-      e.preventDefault();
-      let data = new FormData();
-      data.append('post_type', '4');
-      data.append('property_type', type.toString());
-      data.append('city', city.toString());
-      data.append('district', dist.toString());
-      data.append('limit', '100');
-      data.append('offset', '0');
-      // for (let pair of data.entries()) {
-      //   console.log(pair[0]+ ', ' + pair[1]); 
-      // }
-      let config = {
-        method: 'post',
-        url: 'https://lab.karo.land/api/post/listfilter',
-        data: data
-      };
-      axios(config).then(function (response) {
-        setSearchResults(response.data.collection);
-        // console.log(response.data.collection);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    }
-
     return (
         <>
         <section className='mb-20'>
@@ -138,50 +112,13 @@ const Request = () => {
           </button>
         </form>
 
-        <h5 className="mt-2">Chọn theo tỉnh thành, loại nhà:</h5>
-        <form className='mx-auto flex flex-col lg:flex-row justify-between mt-1' onSubmit={filter}>
-        
-          <select onChange={changeSelectOptionHandler}  className="dropdown p-3 mb-2" aria-label=".form-select-lg">
-              {
-                  <>
-                  <option value="0">Chọn TP</option>
-                  {cities.map(c => (<option value={c.id}>{c.name}</option>))}
-                  </>
-              }
-          </select>
-
-          <select onChange={(e) => setDist(e.target.value)} className="dropdown p-3 mb-2" aria-label=".form-select-lg">
-              {
-                  <>
-                  <option value="0">Chọn quận</option>
-                  {listDistrict.map((district) => <option value={district.id}>{district.name}</option>)}
-                  </>
-              }
-          </select>
-
-          <select onChange={(e) => setType(e.target.value)} className="dropdown p-3 mb-2" aria-label=".form-select-lg">
-            <option value="0">Chọn loại nhà</option>
-            <option value="1">Nhà Phố</option>
-            <option value="2">Chung Cư</option>
-            <option value="4">Đất nền</option>
-          </select>
-
-          <button type='submit'
-            className='bg-red-700 text-white px-5 py-3 mb-2 rounded-lg'
-          >
-            Filter
-          </button>
-        </form>
-
             {
               !isloading ?
               searchResults.map((house, index) => {
                   return (
                     <>
                       { 
-                        <Link to={`/property/${house.id}`} key={index}>
-                          <House2 house={house} />
-                        </Link>
+                        <Post house={house} />
                       }
                     </>
                   );
