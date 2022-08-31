@@ -1,4 +1,5 @@
 import React from 'react';
+import { BiCheck } from 'react-icons/bi';
 
 const Post = ({ house }) => {
   return (
@@ -7,6 +8,9 @@ const Post = ({ house }) => {
         <img className='avatar' src={'https://lab.karo.land/' + house.broker.avatar} alt='' />
         <div>
           <span className='font-semibold'>{house.broker.fullname}</span>
+          <div className='bg-blue-500 rounded-full text-white inline-block  text-lg ml-2'>
+            <BiCheck />
+          </div>
           <br />
           <span className='text-sm'>{house.created_at}</span>
         </div>

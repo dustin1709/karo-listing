@@ -1,5 +1,5 @@
 import React from 'react';
-import { BiArea } from 'react-icons/bi';
+import { BiArea, BiCheck } from 'react-icons/bi';
 import './css/House2.css';
 
 const House2 = ({ house }) => {
@@ -8,12 +8,15 @@ const House2 = ({ house }) => {
       <img src={'https://lab.karo.land/' + house.thumbnail.url} alt='' />
       <div></div>
       <div>
-        <div className='mb-4 flex gap-x-2 text-sm'>
-            <div className='bg-red-800 rounded-full text-white px-3 inline-block'>
-            {house.city_name}
+        <div className='mb-4 flex gap-x-3'>
+            <div className='bg-red-800 rounded-full text-white px-3 inline-block  text-sm'>
+              {house.city_name}
             </div>
-            <div className='bg-gray-500 rounded-full text-white px-3 inline-block'>
-            {house.district_name}
+            <div className='bg-gray-500 rounded-full text-white px-3 inline-block  text-sm'>
+              {house.district_name}
+            </div>
+            <div className='bg-blue-500 rounded-full text-white px-2 inline-block  text-lg'>
+              <BiCheck />
             </div>
         </div>
         <h3 className='font-semibold'>{house.title}</h3>

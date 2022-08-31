@@ -9,6 +9,7 @@ import Mua from './pages/Mua';
 import PropertyDetails from './pages/PropertyDetails';
 import Thue from './pages/Thue';
 import Request from './pages/Request';
+import SearchRequest from './pages/SearchRequest';
 
 const App = () => {
 
@@ -21,6 +22,7 @@ const App = () => {
         <Route path='/mua' element={<Mua />} />
         <Route path='/thue' element={<Thue />} />
         <Route path='/request' element={<Request />} />
+        <Route path='/search_request/:type/:city/:dist/:ptype' element={<SearchRequest />} />
       </Routes>
       <Footer />
     </div>

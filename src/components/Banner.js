@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { BiCheck } from 'react-icons/bi';
 import Image from '../assets/img/background.png';
 import Search from '../components/Search';
 
@@ -21,6 +21,13 @@ const Banner = () => {
         </div>
       </div>
       <Search />
+      <div className='mx-auto container'>
+        Chú thích: Các thông tin có tích xanh &nbsp;
+        <div className='bg-blue-500 rounded-full text-white px-1 inline-block  text-lg'>
+          <BiCheck />
+        </div>
+        &nbsp;là bất động sản được đăng lên bởi thành viên của Karo.
+      </div>
     </section>
   );
 };

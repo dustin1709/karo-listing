@@ -1,18 +1,21 @@
 import React from 'react';
 
 // import icons
-import { BiArea } from 'react-icons/bi';
+import { BiArea, BiCheck } from 'react-icons/bi';
 
 const House = ({ house }) => {
   return (
     <div className='bg-white shadow-1 p-5 rounded-lg rounded-tl-[90px] w-full max-w-[352px] h-[660px] mx-auto cursor-pointer hover:shadow-2xl transition'>
       <img className='mb-8' src={'https://lab.karo.land/' + house.thumbnail.url} style={{width: '312px', height: '312px', borderRadius: '90px 0em 90px 0em'}} alt='' />
-      <div className='mb-4 flex gap-x-2 text-sm'>
-        <div className='bg-red-800 rounded-full text-white px-3 inline-block'>
+      <div className='mb-4 flex gap-x-2'>
+        <div className='bg-red-800 rounded-full text-white px-3 inline-block  text-sm'>
           {house.city_name}
         </div>
-        <div className='bg-gray-500 rounded-full text-white px-3 inline-block'>
+        <div className='bg-gray-500 rounded-full text-white px-3 inline-block  text-sm'>
           {house.district_name}
+        </div>
+        <div className='bg-blue-500 rounded-full text-white px-3 inline-block  text-lg'>
+          <BiCheck />
         </div>
       </div>
       <h1 className='font-semibold'>
