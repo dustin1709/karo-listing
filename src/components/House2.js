@@ -50,11 +50,15 @@ const House2 = ({ house }) => {
             }
         </div>
         <div className='text-lg text-gray-800 mb-1' style={{width: '80%', display: 'grid', gridTemplateColumns: '10% 90%'}}>
-            <img className='avatar' src={'https://lab.karo.land/' + house.broker.avatar} alt='' />
-            <div className='font-semibold'>
-              {house.broker.fullname}
+            <img className='avatar' src={
+                                (house.broker.avatar === null) ? '/pixabay.jpg' : ('https://lab.karo.land/' + house.broker.avatar)
+                            } alt='avatar' />
+            <div>
+              <span className='font-semibold'>{house.broker.fullname}</span>
               <br />
-              Phone: {house.broker.phone}
+              Phone: <a className='text-blue-900'>{(house.broker.phone === null) ? 'Chưa đăng nhập' : house.broker.phone}</a>
+              <br />
+              Email: <a className='text-blue-900'>{(house.broker.email === null) ? 'Chưa đăng nhập' : house.broker.email}</a>
             </div>
         </div>
       </div>
