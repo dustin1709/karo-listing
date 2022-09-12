@@ -8,8 +8,8 @@ const Banner = () => {
   return (
     <section className='h-full max-h-[600px] mb-0 xl:mb-10'>
       <div className='flex flex-col lg:flex-row'>
-        <div className='lg:ml-8 xl:ml-[100px] flex flex-col items-center lg:items-start text-center lg:text-left justify-center flex-1 px-4 lg:px-0'>
-          <h1 className='text-4xl lg:text-[58px] leading-none mb-6'>
+        <div className='lg:ml-8 xl:ml-[95px] flex flex-col items-center lg:items-start text-center lg:text-left justify-center flex-1 px-4 lg:px-0'>
+          <h1 className='text-2xl lg:text-[60px] leading-none mb-6 font-medium'>
             Tìm nhà ưng ý qua <span className='text-red-800'>Karo Homes</span>.
           </h1>
           <p className='max-w-[480px] mb-8'>

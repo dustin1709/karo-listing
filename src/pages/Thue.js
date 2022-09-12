@@ -179,7 +179,7 @@ const Thue = () => {
                   return (
                     <>
                       { 
-                        <Link to="">
+                        <Link to={`/property/${house.id}`} key={index}>
                           <House2 house={house} />
                         </Link>
                       }

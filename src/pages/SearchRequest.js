@@ -10,6 +10,8 @@ const SearchRequest = () => {
     const [isloading, setIsloading] = useState(true);
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
+    const [city_name, setCity_name] = useState("");
+    const [district_name, setDistrict_name] = useState("");
 
     useEffect(() => {
         const filter = async () => {
@@ -30,6 +32,8 @@ const SearchRequest = () => {
               // console.log(response.data.collection);
               setHouses(response.data.collection);
               setIsloading(false);
+              setCity_name(response.data.collection[0].city_name);
+              setDistrict_name(response.data.collection[0].district_name);
             })
             .catch(function (error) {
               console.log(error);
@@ -53,6 +57,14 @@ const SearchRequest = () => {
 
     return (
         <div className='container mx-auto'>
+        <div className='mt-2 mb-3'>
+            <div className='bg-red-800 rounded-full text-white px-5 inline-block  text-lg mr-2'>
+              {city_name}
+            </div>
+            <div className='bg-gray-500 rounded-full text-white px-5 inline-block  text-lg'>
+              {district_name}
+            </div>
+        </div>
         <form className="flex items-center" onSubmit={(e) => e.preventDefault()}>
           <div className="relative w-full">
               <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">

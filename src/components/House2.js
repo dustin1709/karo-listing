@@ -18,7 +18,7 @@ const House2 = ({ house }) => {
             <div className='bg-blue-500 rounded-full text-white px-2 inline-block  text-lg'>
               <BiCheck />
             </div>
-        </div>
+          </div>
         <h3 className='font-semibold'>{house.title}</h3>
         <h5 className='text-gray-500'>{house.created_at}</h5>
         <h2 className='mt-2'>{house.property.full_address ? house.property.full_address : "Đang cập nhật"}</h2>

@@ -213,14 +213,13 @@ const Mua = () => {
               <option value="1000">1000</option>
           </select>
         </div>
-
             {
               !isloading ?
               searchResults.map((house, index) => {
                   return (
                     <>
                       { 
-                        <Link to="">
+                        <Link to={`/property/${house.id}`} key={index}>
                           <House2 house={house} />
                         </Link>
                       }
