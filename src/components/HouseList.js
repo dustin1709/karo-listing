@@ -23,7 +23,7 @@ const HouseList = () => {
       houselist.map((house) => {
         if(house.type == 1) {hlist.push(house)}
       })
-      hlist.length = 24;
+      hlist.length = 15;
       setHouses(hlist.reverse());
       setIsloading(false);
     }).catch(function (error) {
@@ -50,7 +50,7 @@ const HouseList = () => {
               <div></div>
               <div style={{width: '100%', padding: '8%', textAlign: 'center'}}>
                 <div className="loader"></div>
-                <h2 className="mt-5">Vui lòng chờ xữ liệu tải...</h2>
+                <h2 className="mt-5">Vui lòng chờ dữ liệu tải...</h2>
               </div>
               <div></div>
             </>
