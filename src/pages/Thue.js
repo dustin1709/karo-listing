@@ -93,28 +93,32 @@ const Thue = () => {
 
     const filter = async (e) => {
       e.preventDefault();
-      let data = new FormData();
-      data.append('post_type', '2');
-      data.append('property_type', type.toString());
-      data.append('city', city.toString());
-      data.append('district', dist.toString());
-      data.append('limit', '100');
-      data.append('offset', '0');
-      // for (let pair of data.entries()) {
-      //   console.log(pair[0]+ ', ' + pair[1]); 
-      // }
-      let config = {
-        method: 'post',
-        url: 'https://lab.karo.land/api/post/listfilter',
-        data: data
-      };
-      axios(config).then(function (response) {
-        setSearchResults(response.data.collection);
-        // console.log(response.data.collection);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      if (type !== 0 && city !== 0 && dist !== 0) {
+        let data = new FormData();
+        data.append('post_type', '2');
+        data.append('property_type', type.toString());
+        data.append('city', city.toString());
+        data.append('district', dist.toString());
+        data.append('limit', '100');
+        data.append('offset', '0');
+        // for (let pair of data.entries()) {
+        //   console.log(pair[0]+ ', ' + pair[1]); 
+        // }
+        let config = {
+          method: 'post',
+          url: 'https://lab.karo.land/api/post/listfilter',
+          data: data
+        };
+        axios(config).then(function (response) {
+          setSearchResults(response.data.collection);
+          // console.log(response.data.collection);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      } else {
+        alert("Xin vui lòng chọn lại các lựa chọn.");
+      }
     }
 
     return (

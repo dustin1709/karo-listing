@@ -67,7 +67,7 @@ const PropertyDetails = () => {
                       <div className='mb-8'>
                         <img src={'https://lab.karo.land/' + property.thumbnail.url} alt='' />
                       </div>
-                      <div className='flex gap-x-6 text-violet-700 mb-6'>
+                      <div className='flex gap-x-6 text-red-700 mb-6'>
                         <div className='flex gap-x-2 items-center'>
                           <span className='text-2xl'> Dài </span>
                           <div className='text-lg font-medium'>{property.chieu_dai}</div>
@@ -78,7 +78,15 @@ const PropertyDetails = () => {
                         </div>
                         <div className='flex gap-x-2 items-center'>
                           <BiArea className='text-2xl' />
-                          <div className='text-lg font-medium'>{property.property.dien_tich_san}</div>
+                          <div className='text-lg font-medium'>{property.property.dien_tich_san} m2</div>
+                        </div>
+                        <div className='flex gap-x-2 items-center'>
+                          <span className='text-2xl'> Pháp lý: </span>
+                          <div className='text-2xl text-black'>{property.property.phap_ly}</div>
+                        </div>
+                        <div className='flex gap-x-2 items-center'>
+                          <span className='text-2xl'> Số năm xây dựng: </span>
+                          <div className='text-2xl text-black'>{property.property.so_nam_xay_dung}</div>
                         </div>
                       </div>
                       <p>{property.description}</p>
