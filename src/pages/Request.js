@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Post from '../components/Post';
 import Cities from "../components/hooks/Cities";
+import ReactPaginate from 'react-paginate';
 import "../components/css/loader.css";
 
 const Request = () => {
@@ -10,44 +11,6 @@ const Request = () => {
     const [dist, setDist] = useState(0);
     const [type, setType] = useState(0);
     const [isloading, setIsloading] = useState(true);
-
-    const cities = Cities();
-    const selectedCity = useRef(1);
-    const [listDistrict, setListDistrict] = useState([]);
-
-    const changeSelectOptionHandler = (e) => {
-        selectedCity.current = e.target.value;
-        setCity(e.target.value);
-        let data = new FormData();
-        data.append('city', selectedCity.current);
-        let config = {
-          method: 'post',
-          url: 'https://lab.karo.land/api/post/districtlist',
-          data: data
-        };
-        axios(config).then(function (response) {
-          setListDistrict(response.data.district);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    };
-
-    useEffect(() => {
-      let data = new FormData();
-      data.append('city', 1);
-      let config = {
-        method: 'post',
-        url: 'https://lab.karo.land/api/post/districtlist',
-        data: data
-      };
-      axios(config).then(function (response) {
-        setListDistrict(response.data.district);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    }, []);
 
     const [houses, setHouses] = useState([]);
     const [search, setSearch] = useState("");
@@ -91,6 +54,66 @@ const Request = () => {
       setSearchResults(filteredResults.reverse());
     }, [houses, search]);
 
+    function Items({ currentItems }) {
+      return (
+        <>
+          {currentItems.map((house, index) => {
+                  return (
+                    <>
+                      { 
+                        <Post house={house} />
+                      }
+                    </>
+                  );
+          })}
+        </>
+      );
+    }
+
+    function PaginatedItems({ itemsPerPage }) {
+      // We start with an empty list of items.
+      const [currentItems, setCurrentItems] = useState([]);
+      const [pageCount, setPageCount] = useState(0);
+      // Here we use item offsets; we could also use page offsets
+      // following the API or data you're working with.
+      const [itemOffset, setItemOffset] = useState(0);
+    
+      useEffect(() => {
+        // Fetch items from another resources.
+        const endOffset = itemOffset + itemsPerPage;
+        // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+        setCurrentItems(searchResults.slice(itemOffset, endOffset));
+        setPageCount(Math.ceil(searchResults.length / itemsPerPage));
+      }, [itemOffset, itemsPerPage]);
+    
+      // Invoke when user click to request another page.
+      const handlePageClick = (event) => {
+        const newOffset = (event.selected * itemsPerPage) % searchResults.length;
+        // console.log(
+        //   `User requested page number ${event.selected}, which is offset ${newOffset}`
+        // );
+        setItemOffset(newOffset);
+      };
+    
+      return (
+        <>
+          <Items currentItems={currentItems} />
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel="next >"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={5}
+            pageCount={pageCount}
+            previousLabel="< previous"
+            renderOnZeroPageCount={null}
+            containerClassName={"pagination"}
+            subContainerClassName={"pages pagination"}
+            activeClassName={"page-active"}
+          />
+        </>
+      );
+    }
+
     return (
         <>
         <section className='mb-20'>
@@ -114,15 +137,16 @@ const Request = () => {
 
             {
               !isloading ?
-              searchResults.map((house, index) => {
-                  return (
-                    <>
-                      { 
-                        <Post house={house} />
-                      }
-                    </>
-                  );
-              }) : 
+              // searchResults.map((house, index) => {
+              //     return (
+              //       <>
+              //         { 
+              //           <Post house={house} />
+              //         }
+              //       </>
+              //     );
+              // })
+              <PaginatedItems itemsPerPage={10} /> : 
               <div style={{width: '100%', padding: '8%', textAlign: 'center'}}>
                 <div className="loader"></div>
                 <h2 className="mt-5">Đang tải dữ liệu...</h2>
