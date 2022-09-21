@@ -61,8 +61,9 @@ const Search = () => {
   }
 
   return (
-    <form onSubmit={sendForm} className='px-[30px] py-5 max-w-[1170px] mx-auto flex flex-col lg:flex-row justify-between gap-4 lg:gap-x-3 relative lg:-top-4 lg:shadow-1 bg-white lg:bg-transparent lg:backdrop-blur rounded-lg'>
-      
+    <form onSubmit={sendForm} className='px-[30px] py-3 mb-1 max-w-[1170px] mx-auto lg:-top-4 lg:shadow-1 lg:bg-transparent lg:backdrop-blur'>
+      <h5 className='font-medium text-[20px]'>Tìm nhà</h5>
+      <div className='py-3 mx-auto flex flex-col lg:flex-row justify-between gap-4 lg:gap-x-3 relative'>
       <select onChange={(e) => setPtype(e.target.value)} className="dropdown" aria-label=".form-select-lg">
         <option value="0">Chọn nhu cầu</option>
         <option value="1">Mua</option>
@@ -106,6 +107,7 @@ const Search = () => {
       >
         <RiSearch2Line />
       </button>
+      </div>
     </form>
   );
 };

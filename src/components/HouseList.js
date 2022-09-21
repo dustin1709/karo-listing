@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import "./css/loader.css";
 
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import "./css/Carousel.css";
+
 const HouseList = () => {
   const [houses, setHouses] = useState([]);
   const [isloading, setIsloading] = useState(true);
@@ -31,20 +35,51 @@ const HouseList = () => {
     });
   }, []);
 
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+      slidesToSlide: 3 // optional, default to 1.
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1,
+      slidesToSlide: 2 // optional, default to 1.
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      slidesToSlide: 1 // optional, default to 1.
+    }
+  };
+
   return (
     <section className='mb-20'>
       <div className='container mx-auto'>
-        <h1 className='text-4xl lg:text-[45px] leading-none mb-10 text-red-800 font-semibold'>Nhà nổi bật</h1>
-        <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-14'>
+        <h1 className='text-4xl lg:text-[45px] leading-none mb-10 text-red-800 font-semibold'>Mới nhất</h1>
+        {/* <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-14'> */}
           {
             !isloading ?
-            houses.map((house, index) => {
+            <Carousel
+              showDots={true}
+              responsive={responsive}
+              ssr={true} // means to render carousel on server-side.
+              infinite={true}
+              autoPlay={true}
+              autoPlaySpeed={3000}
+              containerClass="carousel-container"
+              removeArrowOnDeviceType={["tablet", "mobile"]}
+              dotListClass="custom-dot-list-style"
+              itemClass="carousel-item"
+            >
+              {houses.map((house, index) => {
               return (
                 <Link to={`/property/${house.id}`} key={index}>
                   <House house={house} />
                 </Link>
               );
-            })
+              })}
+            </Carousel>
             :
             <>
               <div></div>
@@ -55,7 +90,7 @@ const HouseList = () => {
               <div></div>
             </>
           }
-        </div>
+        {/* </div> */}
       </div>
     </section>
   );

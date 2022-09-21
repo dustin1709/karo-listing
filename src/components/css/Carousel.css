@@ -1,0 +1,33 @@
+.custom-dot-list-style {
+    width: 20%;
+    margin-left: 40%;
+    padding: 0.25em;
+}
+
+.carousel-container {
+    padding-bottom: 5%;
+}
+
+.react-multi-carousel-dot button {
+    background-color: #ffff;
+    width: 100px;
+    height: 5px;
+    border: 1px solid var(--logo-color);
+    border-radius: 3px;
+}
+
+.react-multi-carousel-dot--active button {
+    background-color: var(--logo-color);
+}
+
+@media screen and (max-width: 1024px) {
+    .react-multi-carousel-dot button {
+        width: 50px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .react-multi-carousel-dot button {
+        width: 1em;
+    }
+}
