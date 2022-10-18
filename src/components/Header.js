@@ -14,7 +14,7 @@ const Header = () => {
     {name:"thuê", link:"/thue"},
     {name:"nhu cầu", link:"/request"},
     {name:"tìm môi giới", link:"/timmoigioi"},
-    {name:"đăng tin", link:"/post"},
+    {name:"đăng tin", link:"/post"}
   ];
   let [open,setOpen]=useState(false);
 
@@ -32,16 +32,16 @@ const Header = () => {
       {open ? <img src={Bar}/>:<img src={Close}/>}
       </div>
 
-      <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-20 ':'top-[-490px]'}`}>
+      <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-18 ':'top-[-490px]'}`}>
         {
           Links.map((link)=>(
             <li key={link.name} className='md:ml-6 md:my-0 my-7'>
-              <Link to={link.link} className='text-gray-800 hover:text-red-700 duration-500'>{link.name}</Link>
+              <Link to={link.link} className='hover:text-red-700 duration-500'>{link.name}</Link>
             </li>
           ))
         }
-        <button className='ml-3 p-1 bg-red-700 text-white rounded-lg'>
-          ĐĂNG NHẬP
+        <button className='ml-5 py-1 px-3 bg-red-800 text-white rounded-lg hover:bg-gray-600'>
+          đăng nhập
         </button>
       </ul>
       </div>

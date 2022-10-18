@@ -15,6 +15,9 @@ const Banner = () => {
           <p className='max-w-[480px] mb-8'>
             Thông tin chính xác, đảm bảo giấy tờ pháp lý, nhanh, và tiện lợi.
           </p>
+          <button className='bg-red-800 hover:bg-gray-600 text-xl rounded-lg text-white px-5 py-3'>
+            TÌM MÔI GIỚI
+          </button>
         </div>
         <div className='hidden flex-1 lg:flex justify-end items-end'>
           <img src={Image} alt='' style={{borderRadius: '30px 0 0 0', opacity: '0.9'}} />
