@@ -8,6 +8,7 @@ const Home = () => {
   return (
     <div className='min-h-[1200px]'>
       <Banner />
+      <div className='clear-both py-10'></div>
       <HouseList />
     </div>
   );

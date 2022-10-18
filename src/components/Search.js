@@ -61,7 +61,7 @@ const Search = () => {
   }
 
   return (
-    <form onSubmit={sendForm} className='px-[30px] py-3 mb-1 max-w-[1170px] mx-auto lg:-top-4 lg:shadow-1 lg:bg-transparent lg:backdrop-blur'>
+    <form onSubmit={sendForm} className='px-[15px] py-3 mb-1 max-w-[1170px] mx-auto lg:-top-4 lg:shadow-1 bg-transparent backdrop-blur rounded-lg'>
       <h5 className='font-medium text-[20px]'>Tìm nhà</h5>
       <div className='py-3 mx-auto flex flex-col lg:flex-row justify-between gap-4 lg:gap-x-3 relative'>
       <select onChange={(e) => setPtype(e.target.value)} className="dropdown" aria-label=".form-select-lg">
