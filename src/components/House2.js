@@ -8,7 +8,7 @@ const House2 = ({ house }) => {
       <img src={'https://lab.karo.land/' + house.thumbnail.url} alt='' />
       <div></div>
       <div>
-        <div className='mb-4 flex gap-x-3'>
+        <div className='hidden md:mb-4 md:flex md:gap-x-3'>
             <div className='bg-red-800 rounded-full text-white px-3 inline-block  text-sm'>
               {house.city_name}
             </div>
@@ -22,43 +22,43 @@ const House2 = ({ house }) => {
         <h3 className='font-semibold'>{house.title}</h3>
         <h5 className='text-gray-500'>{house.created_at}</h5>
         <h2 className='mt-2'>{house.property.full_address ? house.property.full_address : "Đang cập nhật"}</h2>
-        <h2 className='mt-2'>{house.description}</h2>
+        <h2 className='hidden md:mt-2'>{house.description}</h2>
         <div className='flex gap-x-4 my-4'>
             <div className='flex items-center text-gray-600 gap-1'>
-            <div className='text-[25px] rounded-full'>
-                <BiArea />
+              <div className='text-[25px] rounded-full'>
+                  <BiArea />
+              </div>
+              <div className='text-base'>{house.property.dien_tich_san} m2</div>
             </div>
-            <div className='text-base'>{house.property.dien_tich_san} m2</div>
+            <div className='hidden md:flex items-center text-gray-600 gap-1'>
+              <div className='text-[18px] font-bold'>
+                  Dài
+              </div>
+              <div className='text-base'>{house.property.chieu_dai} m</div>
             </div>
-            <div className='flex items-center text-gray-600 gap-1'>
-            <div className='text-[18px] font-bold'>
-                Dài
-            </div>
-            <div className='text-base'>{house.property.chieu_dai} m</div>
-            </div>
-            <div className='flex items-center text-gray-600 gap-1'>
-            <div className='text-[18px] font-bold'>
-                Rộng
-            </div>
-            <div className='text-base'>{house.property.chieu_rong} m</div>
+            <div className='hidden md:flex items-center text-gray-600 gap-1'>
+              <div className='text-[18px] font-bold'>
+                  Rộng
+              </div>
+              <div className='text-base'>{house.property.chieu_rong} m</div>
             </div>
         </div>
         <div className='text-lg font-semibold text-red-800 mb-4'>
             {
-            house.price[0].price ?
-            "VND "+(house.price[0].price / 1000000000)+" tỷ" : "Giá đang cập nhật"
+              house.price[0].price ?
+                (house.price[0].price / 1000000000)+" tỷ" : "Giá đang cập nhật"
             }
         </div>
-        <div className='text-lg text-gray-800 mb-1' style={{width: '80%', display: 'grid', gridTemplateColumns: '10% 90%'}}>
+        <div className='text-lg text-gray-800 mb-1 author'>
             <img className='avatar' src={
                                 (house.broker.avatar === null) ? '/pixabay.jpg' : ('https://lab.karo.land/' + house.broker.avatar)
                             } alt='avatar' />
             <div>
               <span className='font-semibold'>{house.broker.fullname}</span>
               <br />
-              Phone: <a className='text-blue-900'>{(house.broker.phone === null) ? 'Chưa đăng nhập' : house.broker.phone}</a>
+              <a className='text-blue-900'>{(house.broker.phone === null) ? 'Chưa đăng nhập' : house.broker.phone}</a>
               <br />
-              Email: <a className='text-blue-900'>{(house.broker.email === null) ? 'Chưa đăng nhập' : house.broker.email}</a>
+              <a className='text-blue-900'>{(house.broker.email === null) ? 'Chưa đăng nhập' : house.broker.email}</a>
             </div>
         </div>
       </div>

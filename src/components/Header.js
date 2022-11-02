@@ -16,7 +16,8 @@ const Header = () => {
     {name:"tìm môi giới", link:"/timmoigioi"},
     {name:"đăng tin", link:"/post"}
   ];
-  let [open,setOpen]=useState(false);
+  
+  const [open,setOpen] = useState(false);
 
   return (
     <>
@@ -40,13 +41,13 @@ const Header = () => {
             </li>
           ))
         }
-        <button className='ml-5 py-1 px-3 bg-red-800 text-white rounded-lg hover:bg-gray-600'>
+        <button className='md:ml-5 py-1 px-3 bg-red-800 text-white rounded-lg hover:bg-gray-600'>
           đăng nhập
         </button>
       </ul>
       </div>
     </div>
-    <div style={{padding: '50px'}}></div>
+    <div style={{padding: '3em'}}></div>
     </>
   );
 };

@@ -6,8 +6,18 @@ import Cities from "../components/hooks/Cities";
 import ReactPaginate from "react-paginate";
 import "../components/css/loader.css";
 import "../components/css/Pagination.css";
+import Dialog from "../components/Dialog";
 
 const Thue = () => {
+    const [showTaskDialog, setShowTaskDialog] = useState(false);
+    const confirm = () => {
+      console.log('Confirm');
+      setShowTaskDialog(false);
+    };
+    const cancel = () => {
+      setShowTaskDialog(false);
+    };
+
     const [city, setCity] = useState(0);
     const [dist, setDist] = useState(0);
     const [type, setType] = useState(0);
@@ -119,7 +129,9 @@ const Thue = () => {
           console.log(error);
         });
       } else {
-        alert("Xin vui lòng chọn lại các lựa chọn.");
+        // alert("Xin vui lòng chọn lại các lựa chọn.");
+        e.preventDefault();
+        setShowTaskDialog(true);
       }
     }
 
@@ -187,6 +199,11 @@ const Thue = () => {
 
     return (
         <>
+        <Dialog
+        show={showTaskDialog}
+        title="Chưa chọn bộ lọc"
+        description="Để sử dụng công cụ filter, xin vui lòng điền hết hoặc chọn lại tất cả các bộ lọc."
+        confirm={confirm} />
         <section className='mb-20'>
         <div className='container mx-auto'>
         <h1 className="mb-2 font-semibold text-red-800 text-[20px]">Tìm thuê nhà</h1>

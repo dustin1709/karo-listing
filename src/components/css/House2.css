@@ -7,3 +7,20 @@
     padding: 1%;
     margin: 1%;
 }
+
+.author {
+    width: 80%; 
+    display: grid; 
+    grid-template-columns: 10% 90%;
+}
+
+@media screen and (max-width: 640px) {
+    .author {
+        width: 80%; 
+        display: block; 
+        font-size: 90%;
+    }
+    .author img {
+        display: none;
+    }
+}

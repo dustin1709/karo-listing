@@ -6,8 +6,18 @@ import Cities from "../components/hooks/Cities";
 import ReactPaginate from 'react-paginate';
 import "../components/css/loader.css";
 import "../components/css/Pagination.css";
+import Dialog from '../components/Dialog';
 
 const Mua = () => {
+    const [showTaskDialog, setShowTaskDialog] = useState(false);
+    const confirm = () => {
+      console.log('Confirm');
+      setShowTaskDialog(false);
+    };
+    const cancel = () => {
+      setShowTaskDialog(false);
+    };
+
     const [city, setCity] = useState(0);
     const [dist, setDist] = useState(0);
     const [type, setType] = useState(0);
@@ -121,7 +131,8 @@ const Mua = () => {
           console.log(error);
         });
       } else {
-        alert("Xin vui lòng chọn lại các lựa chọn.");
+        e.preventDefault();
+        setShowTaskDialog(true);
       }
     }
 
@@ -155,17 +166,19 @@ const Mua = () => {
     function Items({ currentItems }) {
       return (
         <>
-          {currentItems.map((house, index) => {
-                  return (
-                    <>
-                      { 
-                        <Link to={`/property/${house.id}`} key={index}>
-                          <House2 house={house} />
-                        </Link>
-                      }
-                    </>
-                  );
-          })}
+          {
+            currentItems.map((house, index) => {
+                    return (
+                      <>
+                        { 
+                          <Link to={`/property/${house.id}`} key={index}>
+                            <House2 house={house} />
+                          </Link>
+                        }
+                      </>
+                    );
+            })
+          }
         </>
       );
     }
@@ -216,7 +229,12 @@ const Mua = () => {
 
     return (
         <>
-        <section className='mb-20'>
+        <Dialog
+        show={showTaskDialog}
+        title="Chưa chọn bộ lọc"
+        description="Để sử dụng công cụ filter, xin vui lòng điền hết hoặc chọn lại tất cả các bộ lọc."
+        confirm={confirm} />
+        <section className='mb-20' style={{width: '100%'}}>
         <div className='container mx-auto'>
         <h1 className="mb-2 font-semibold text-red-800 text-[20px]">Tìm mua nhà</h1>
         <form className="flex items-center" onSubmit={(e) => e.preventDefault()}>
