@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, Component } from "react";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import House2 from '../components/House2';
@@ -22,11 +22,10 @@ const Mua = () => {
     const [dist, setDist] = useState(0);
     const [type, setType] = useState(0);
     const [isloading, setIsloading] = useState(true);
-    const lim = useRef(200);
-    const [limit, setLimit] = useState(200);
     const cities = Cities();
     const selectedCity = useRef(1);
     const [listDistrict, setListDistrict] = useState([]);
+    const [count, setCount] = useState(0);
 
     const changeSelectOptionHandler = (e) => {
         selectedCity.current = e.target.value;
@@ -68,26 +67,38 @@ const Mua = () => {
 
     useEffect(() => {
       const loadData = async () => {
-        let data = new FormData();
-        data.append('limit', lim.current);
-        data.append('offset', '0');
-        let config = {
+        let conf = {
           method: 'post',
-          url: 'https://lab.karo.land/api/post/listall',
-          data: data
+          url: 'https://lab.karo.land/api/post/count'
         };
-        axios(config).then(function (response) {
-          // console.log(JSON.stringify(response.data));
-          const houselist = response.data.collection;
-          let hlist = [];
-          houselist.map((house) => {
-            if(house.type !== 4 && house.type !== 2) {hlist.push(house)}
+        let limit = 0;
+        axios(conf).then(function (response) {
+          limit = response.data.countPost;
+          setCount(limit);
+          console.log("Total listing is " + limit);
+          let data = new FormData();
+          data.append('limit', limit.toString());
+          data.append('offset', '0');
+          let config = {
+            method: 'post',
+            url: 'https://lab.karo.land/api/post/listall',
+            data: data
+          };
+          axios(config).then(function (res) {
+            // console.log(JSON.stringify(res.data));
+            const houselist = res.data.collection;
+            let hlist = [];
+            houselist.map((house) => {
+              if(house.type !== 4 && house.type !== 2) {hlist.push(house)}
+            })
+            setHouses(hlist);
+            setIsloading(false);
+          }).catch(function (err) {
+            console.log(err);
           })
-          setHouses(hlist);
-          setIsloading(false);
         }).catch(function (error) {
-          console.log(error);
-        })
+          console.log("error loading listing count...");
+        });
       };
       loadData();
     }, []);
@@ -107,13 +118,14 @@ const Mua = () => {
 
     const filter = async (e) => {
       e.preventDefault();
+      console.log(count);
       if(type !== 0 && city !== 0 && dist !== 0) {
         let data = new FormData();
         data.append('post_type', '1');
         data.append('property_type', type.toString());
         data.append('city', city.toString());
         data.append('district', dist.toString());
-        data.append('limit', '200');
+        data.append('limit', count.toString());
         data.append('offset', '0');
         // for (let pair of data.entries()) {
         //   console.log(pair[0]+ ', ' + pair[1]); 
@@ -135,33 +147,6 @@ const Mua = () => {
         setShowTaskDialog(true);
       }
     }
-
-    const changeLimit = async (e) => {
-        e.preventDefault();
-        setIsloading(true);
-        let data = new FormData();
-        lim.current = e.target.value;
-        setLimit(e.target.value);
-        data.append('limit', lim.current);
-        data.append('offset', '0');
-        let config = {
-          method: 'post',
-          url: 'https://lab.karo.land/api/post/listall',
-          data: data
-        };
-        axios(config).then(function (response) {
-          const houselist = response.data.collection;
-          let hlist = [];
-          houselist.map((house) => {
-            if(house.type !== 4 && house.type !== 2) {hlist.push(house)}
-          })
-          setHouses(hlist.reverse());
-          console.log(hlist.length);
-          setIsloading(false);
-        }).catch(function (error) {
-          console.log(error);
-        })
-    };
 
     function Items({ currentItems }) {
       return (
@@ -287,18 +272,6 @@ const Mua = () => {
             Filter
           </button>
         </form>
-
-        <div>
-          <label className="mr-2">Đang hiển thị {limit} kết quả</label>
-          <select onChange={changeLimit} className="dropdown p-2 mb-1" aria-label=".form-select-lg">
-              <option value="100">100</option>
-              <option value="200" selected>200</option>
-              <option value="300">300</option>
-              <option value="500">500</option>
-              <option value="800">800</option>
-              <option value="1000">1000</option>
-          </select>
-        </div>
             {
               !isloading ?
               // searchResults.map((house, index) => {

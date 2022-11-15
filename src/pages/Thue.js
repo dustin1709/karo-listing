@@ -26,6 +26,7 @@ const Thue = () => {
     const cities = Cities();
     const selectedCity = useRef(1);
     const [listDistrict, setListDistrict] = useState([]);
+    const [count, setCount] = useState(0);
 
     const changeSelectOptionHandler = (e) => {
         selectedCity.current = e.target.value;
@@ -67,25 +68,38 @@ const Thue = () => {
 
     useEffect(() => {
       const loadData = async () => {
-        let data = new FormData();
-        data.append('limit', '100');
-        data.append('offset', '0');
-        let config = {
+        let conf = {
           method: 'post',
-          url: 'https://lab.karo.land/api/post/listall',
-          data: data
+          url: 'https://lab.karo.land/api/post/count'
         };
-        axios(config).then(function (response) {
-          const houselist = response.data.collection;
-          let hlist = [];
-          houselist.map((house) => {
-            if(house.type === 2) {hlist.push(house)}
+        let limit = 0;
+        axios(conf).then(function (response) {
+          limit = response.data.countPost;
+          setCount(limit);
+          console.log("Total listing is " + limit);
+          let data = new FormData();
+          data.append('limit', limit.toString());
+          data.append('offset', '0');
+          let config = {
+            method: 'post',
+            url: 'https://lab.karo.land/api/post/listall',
+            data: data
+          };
+          axios(config).then(function (res) {
+            // console.log(JSON.stringify(res.data));
+            const houselist = res.data.collection;
+            let hlist = [];
+            houselist.map((house) => {
+              if(house.type === 2) {hlist.push(house)}
+            })
+            setHouses(hlist);
+            setIsloading(false);
+          }).catch(function (err) {
+            console.log(err);
           })
-          setHouses(hlist);
-          setIsloading(false);
         }).catch(function (error) {
-          console.log(error);
-        })
+          console.log("error loading listing count...");
+        });
       };
       loadData();
     }, []);
@@ -111,7 +125,7 @@ const Thue = () => {
         data.append('property_type', type.toString());
         data.append('city', city.toString());
         data.append('district', dist.toString());
-        data.append('limit', '100');
+        data.append('limit', count.toString());
         data.append('offset', '0');
         // for (let pair of data.entries()) {
         //   console.log(pair[0]+ ', ' + pair[1]); 

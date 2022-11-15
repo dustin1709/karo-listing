@@ -13,25 +13,36 @@ const PropertyDetails = () => {
 
   useEffect(() => {
     const loadData = async () => {
-      let data = new FormData();
-      data.append('limit', '1000');
-      data.append('offset', '0');
-      let config = {
+      let conf = {
         method: 'post',
-        url: 'https://lab.karo.land/api/post/listall',
-        data: data
+        url: 'https://lab.karo.land/api/post/count'
       };
-      axios(config).then(function (response) {
-        const houselist = response.data.collection;
-        let hlist = [];
-        houselist.map((house) => {
-          if(house.id === id) {hlist.push(house)}
+      let limit = 0;
+      axios(conf).then(function (response) {
+        limit = response.data.countPost;
+        let data = new FormData();
+        data.append('limit', limit.toString());
+        data.append('offset', '0');
+        let config = {
+          method: 'post',
+          url: 'https://lab.karo.land/api/post/listall',
+          data: data
+        };
+        axios(config).then(function (res) {
+          // console.log(JSON.stringify(res.data));
+          const houselist = res.data.collection;
+          let hlist = [];
+          houselist.map((house) => {
+            if(house.id === id) {hlist.push(house)}
+          })
+          setHouses(hlist);
+          setIsloading(false);
+        }).catch(function (err) {
+          console.log(err);
         })
-        setHouses(hlist);
-        setIsloading(false);
       }).catch(function (error) {
-        console.log(error);
-      })
+        console.log("error loading listing count...");
+      });
     };
     loadData();
   }, []);

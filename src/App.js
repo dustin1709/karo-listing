@@ -1,4 +1,5 @@
-import React, {lazy, Suspense} from 'react';
+import React, {lazy, Suspense, useState, useEffect} from 'react';
+import axios from 'axios';
 import { Routes, Route } from 'react-router-dom';
 import Footer from './components/Footer';
 import Header from './components/Header';
