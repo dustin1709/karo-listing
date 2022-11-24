@@ -8,7 +8,7 @@ import "../components/css/loader.css";
 import "../components/css/Pagination.css";
 import Dialog from '../components/Dialog';
 
-const Mua = () => {
+const Mua = ({houses, count, isloading}) => {
     const [showTaskDialog, setShowTaskDialog] = useState(false);
     const confirm = () => {
       console.log('Confirm');
@@ -18,14 +18,19 @@ const Mua = () => {
       setShowTaskDialog(false);
     };
 
+    useEffect(() => {
+      console.log("listing loaded: " + isloading);
+      console.log("total listing: " + count);
+    }, []);
+    
     const [city, setCity] = useState(0);
     const [dist, setDist] = useState(0);
     const [type, setType] = useState(0);
-    const [isloading, setIsloading] = useState(true);
     const cities = Cities();
     const selectedCity = useRef(1);
     const [listDistrict, setListDistrict] = useState([]);
-    const [count, setCount] = useState(0);
+    const [search, setSearch] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
 
     const changeSelectOptionHandler = (e) => {
         selectedCity.current = e.target.value;
@@ -59,48 +64,6 @@ const Mua = () => {
       .catch(function (error) {
         console.log(error);
       });
-    }, []);
-
-    const [houses, setHouses] = useState([]);
-    const [search, setSearch] = useState("");
-    const [searchResults, setSearchResults] = useState([]);
-
-    useEffect(() => {
-      const loadData = async () => {
-        let conf = {
-          method: 'post',
-          url: 'https://lab.karo.land/api/post/count'
-        };
-        let limit = 0;
-        axios(conf).then(function (response) {
-          limit = response.data.countPost;
-          setCount(limit);
-          console.log("Total listing is " + limit);
-          let data = new FormData();
-          data.append('limit', limit.toString());
-          data.append('offset', '0');
-          let config = {
-            method: 'post',
-            url: 'https://lab.karo.land/api/post/listall',
-            data: data
-          };
-          axios(config).then(function (res) {
-            // console.log(JSON.stringify(res.data));
-            const houselist = res.data.collection;
-            let hlist = [];
-            houselist.map((house) => {
-              if(house.type !== 4 && house.type !== 2) {hlist.push(house)}
-            })
-            setHouses(hlist);
-            setIsloading(false);
-          }).catch(function (err) {
-            console.log(err);
-          })
-        }).catch(function (error) {
-          console.log("error loading listing count...");
-        });
-      };
-      loadData();
     }, []);
 
     useEffect(() => {

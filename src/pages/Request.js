@@ -5,48 +5,20 @@ import Post from '../components/Post';
 import Cities from "../components/hooks/Cities";
 import ReactPaginate from 'react-paginate';
 import "../components/css/loader.css";
+import "../components/css/Pagination.css";
 
-const Request = () => {
-    const [city, setCity] = useState(0);
-    const [dist, setDist] = useState(0);
-    const [type, setType] = useState(0);
-    const [isloading, setIsloading] = useState(true);
+const Request = ({houses, isloading}) => {
+    
+    useEffect(() => {
+      console.log("listing request loaded: " + isloading);
+    }, []);
 
-    const [houses, setHouses] = useState([]);
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
 
     useEffect(() => {
-      const loadData = async () => {
-        let data = new FormData();
-        data.append('limit', '100');
-        data.append('offset', '0');
-        let config = {
-          method: 'post',
-          url: 'https://lab.karo.land/api/post/listall',
-          data: data
-        };
-        axios(config).then(function (response) {
-          const houselist = response.data.collection;
-          let hlist = [];
-          houselist.map((house) => {
-            if(house.type === 4) {hlist.push(house)}
-          })
-          setHouses(hlist);
-          setIsloading(false);
-        }).catch(function (error) {
-          console.log(error);
-        })
-      };
-      loadData();
-    }, []);
-
-    useEffect(() => {
       const filteredResults = houses.filter((house) =>
-        (house.city_name || "").toLowerCase().includes(search.toLowerCase())
-        || (house.district_name || "").toLowerCase().includes(search.toLowerCase())
-        || (house.title || "").toLowerCase().includes(search.toLowerCase())
-        || (house.property.full_address || "").toLowerCase().includes(search.toLowerCase())
+        (house.title || "").toLowerCase().includes(search.toLowerCase())
         || (house.broker.fullname || "").toLowerCase().includes(search.toLowerCase())
         || (house.description || "").toLowerCase().includes(search.toLowerCase())
       );

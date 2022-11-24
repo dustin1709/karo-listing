@@ -24,3 +24,17 @@
         display: none;
     }
 }
+
+@media screen and (max-width: 600px) {
+    .avatar {
+        width: 21px;
+        height: 21px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .avatar {
+        width: 32px;
+        height: 32px;
+    }
+}

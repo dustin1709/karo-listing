@@ -8,31 +8,53 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "./css/Carousel.css";
 
-const HouseList = () => {
-  const [houses, setHouses] = useState([]);
-  const [isloading, setIsloading] = useState(true);
+const HouseList = ({ houseNew, houseHanoi, houseSaigon, isloading }) => {
+  // const [houses, setHouses] = useState([]);
+  // const [houses1, setHouses1] = useState([]);
+  // const [houses2, setHouses2] = useState([]);
+  // const [isloading, setIsloading] = useState(true);
   useEffect(() => {
-    let data = new FormData();
-    data.append('limit', '100');
-    data.append('offset', '0');
-    let config = {
-      method: 'post',
-      url: 'https://lab.karo.land/api/post/listall',
-      data: data
-    };
-    axios(config).then(function (response) {
-      //console.log(JSON.stringify(response.data));
-      const houselist = response.data.collection;
-      let hlist = [];
-      houselist.map((house) => {
-        if(house.type == 1) {hlist.push(house)}
-      })
-      hlist.length = 15;
-      setHouses(hlist.reverse());
-      setIsloading(false);
-    }).catch(function (error) {
-      console.log(error);
-    });
+    // const loadData = async () => {
+    //   let conf = {
+    //     method: 'post',
+    //     url: 'https://lab.karo.land/api/post/count'
+    //   };
+    //   let limit = 0;
+    //   axios(conf).then(function (res) {
+    //     limit = res.data.countPost;
+    //     let data = new FormData();
+    //     data.append('limit', limit.toString());
+    //     data.append('offset', '0');
+    //     let config = {
+    //       method: 'post',
+    //       url: 'https://lab.karo.land/api/post/listall',
+    //       data: data
+    //     };
+    //     axios(config).then(function (response) {
+    //       const houselist = response.data.collection;
+    //       let hlist = [];
+    //       let hlist1 = [];
+    //       let hlist2 = [];
+    //       houselist.map((house) => {
+    //         if(house.type == 1) {hlist.push(house)}
+    //         if(house.city_name == "Hà Nội") {hlist1.push(house)}
+    //         if(house.city_name == "TP Hồ Chí Minh") {hlist2.push(house)} 
+    //       })
+    //       hlist.length = 15;
+    //       hlist1.length = 15;
+    //       hlist2.length = 15;
+    //       setHouses1(hlist1.reverse());
+    //       setHouses2(hlist2.reverse());
+    //       setHouses(hlist.reverse());
+    //       setIsloading(false);
+    //     }).catch(function (error) {
+    //       console.log(error);
+    //     });
+    //   }).catch(function (error) {
+    //     console.log("error loading listing count...");
+    //   });
+    // };
+    // loadData();
   }, []);
 
   const responsive = {
@@ -56,7 +78,10 @@ const HouseList = () => {
   return (
     <section className='mb-20'>
       <div className='container mx-auto'>
-        <h1 className='text-4xl lg:text-[45px] leading-none mb-10 text-red-800 font-semibold'>Mới nhất</h1>
+        <h1 className='text-4xl lg:text-[45px] leading-none mb-10 text-red-800 font-semibold'>Gợi ý</h1>
+      </div>
+      <div className='container mx-auto mt-10'>
+        <h1 className='text-4xl lg:text-[25px] leading-none mb-10 text-red-800 font-semibold'>Mới nhất</h1>
         {/* <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-14'> */}
           {
             !isloading ?
@@ -66,13 +91,87 @@ const HouseList = () => {
               ssr={true} // means to render carousel on server-side.
               infinite={true}
               autoPlay={true}
-              autoPlaySpeed={3000}
+              autoPlaySpeed={5000}
               containerClass="carousel-container"
               removeArrowOnDeviceType={["tablet", "mobile"]}
               dotListClass="custom-dot-list-style"
               itemClass="carousel-item"
             >
-              {houses.map((house, index) => {
+              {houseNew.map((house, index) => {
+              return (
+                <Link to={`/property/${house.id}`} key={index}>
+                  <House house={house} />
+                </Link>
+              );
+              })}
+            </Carousel>
+            :
+            <>
+              <div></div>
+              <div style={{width: '100%', padding: '8%', textAlign: 'center'}}>
+                <div className="loader"></div>
+                <h2 className="mt-5">Vui lòng chờ dữ liệu tải...</h2>
+              </div>
+              <div></div>
+            </>
+          }
+        {/* </div> */}
+      </div>
+      <div className='container mx-auto mt-10'>
+        <h1 className='text-4xl lg:text-[25px] leading-none mb-10 text-red-800 font-semibold'>Khu vực Hà Nội</h1>
+        {/* <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-14'> */}
+          {
+            !isloading ?
+            <Carousel
+              showDots={true}
+              responsive={responsive}
+              ssr={true} // means to render carousel on server-side.
+              infinite={true}
+              autoPlay={true}
+              autoPlaySpeed={5000}
+              containerClass="carousel-container"
+              removeArrowOnDeviceType={["tablet", "mobile"]}
+              dotListClass="custom-dot-list-style"
+              itemClass="carousel-item"
+            >
+              {houseHanoi.map((house, index) => {
+              return (
+                <Link to={`/property/${house.id}`} key={index}>
+                  <House house={house} />
+                </Link>
+              );
+              })}
+            </Carousel>
+            :
+            <>
+              <div></div>
+              <div style={{width: '100%', padding: '8%', textAlign: 'center'}}>
+                <div className="loader"></div>
+                <h2 className="mt-5">Vui lòng chờ dữ liệu tải...</h2>
+              </div>
+              <div></div>
+            </>
+          }
+        {/* </div> */}
+      </div>
+      <div className='container mx-auto mt-10'>
+        <h1 className='text-4xl lg:text-[25px] leading-none mb-10 text-red-800 font-semibold'>TP Hồ Chí Minh</h1>
+        {/* <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-14'> */}
+          {
+            !isloading ?
+            <Carousel
+              showDots={true}
+              responsive={responsive}
+              ssr={true} // means to render carousel on server-side.
+              infinite={true}
+              autoPlay={true}
+              autoPlaySpeed={5000}
+              containerClass="carousel-container"
+              removeArrowOnDeviceType={["tablet", "mobile"]}
+              dotListClass="custom-dot-list-style"
+              itemClass="carousel-item"
+            >
+              {houseSaigon.map((house, index) => {
               return (
                 <Link to={`/property/${house.id}`} key={index}>
                   <House house={house} />

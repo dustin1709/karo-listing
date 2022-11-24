@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from "react";
 import axios from "axios";
 import Cities from "../components/hooks/Cities";
 
-const TimMoiGioi = () => {
+const TimMoiGioi = ({listAgent}) => {
 
     const [city, setCity] = useState(0);
     const [dist, setDist] = useState(0);
