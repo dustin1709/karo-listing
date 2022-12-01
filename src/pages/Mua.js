@@ -236,7 +236,7 @@ const Mua = ({houses, count, isloading}) => {
           </button>
         </form>
             {
-              !isloading ?
+              (isloading == false) ?
               // searchResults.map((house, index) => {
               //     return (
               //       <>

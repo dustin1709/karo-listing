@@ -51,7 +51,7 @@ const TimMoiGioi = ({ listAgent }) => {
 
     const filter = async (e) => {
         e.preventDefault();
-        if (city == 0 || dist == 0) {
+        if (city === 0 || dist === 0) {
             e.preventDefault();
             setShowTaskDialog(true);
         } else {
@@ -64,7 +64,7 @@ const TimMoiGioi = ({ listAgent }) => {
                 let fulllist = response.data;
                 let broker_list = [];
                 fulllist.map((broker) => {
-                    if(broker.city_id == city && broker.district_id == dist) {
+                    if(broker.city_id === city && broker.district_id === dist) {
                         broker_list.push(broker);
                     }
                 });
@@ -142,11 +142,13 @@ const TimMoiGioi = ({ listAgent }) => {
         <section className='mb-20'>
             <div className="lg:w-[1200px] lg:pl-9">
             <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5'>
-                {searchResults.map((broker) => {
-                    return (
-                        <NameCard broker={broker} />
-                    );
-                })}
+                {
+                    searchResults.map((broker) => {
+                        return (
+                            <NameCard broker={broker} />
+                        );
+                    })
+                }
             </div>
             </div>
         </section>

@@ -8,10 +8,10 @@ import "../components/css/loader.css";
 import "../components/css/Pagination.css";
 
 const Request = ({houses, isloading}) => {
-    
     useEffect(() => {
-      console.log("listing request loaded: " + isloading);
-    }, []);
+      console.log("request list loaded: " + isloading);
+      console.log("request count: " + houses.length);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
@@ -90,7 +90,7 @@ const Request = ({houses, isloading}) => {
         <>
         <section className='mb-20'>
         <div className='container mx-auto'>
-        <h1 className="mb-2 font-semibold text-red-800 text-[20px]">Tìm thuê nhà</h1>
+        <h1 className="mb-2 font-semibold text-red-800 text-[20px]">Nhu cầu bất động sản</h1>
         <form className="flex items-center" onSubmit={(e) => e.preventDefault()}>
           <div className="relative w-full">
               <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -108,7 +108,7 @@ const Request = ({houses, isloading}) => {
         </form>
 
             {
-              !isloading ?
+              (isloading == false) ?
               // searchResults.map((house, index) => {
               //     return (
               //       <>

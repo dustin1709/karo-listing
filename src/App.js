@@ -6,14 +6,22 @@ import Header from './components/Header';
 
 // import pages
 import Home from './pages/Home';
+import Mua from './pages/Mua';
+import PropertyDetails from './pages/PropertyDetails';
+import Thue from './pages/Thue';
+import Request from './pages/Request';
+import SearchRequest from './pages/SearchRequest';
+import Post from './pages/Post';
+import TimMoiGioi from './pages/TimMoiGioi';
 
-const Mua = lazy(() => import('./pages/Mua'));
-const PropertyDetails = lazy(() => import('./pages/PropertyDetails'));
-const Thue = lazy(() => import('./pages/Thue'));
-const Request = lazy(() => import('./pages/Request'));
-const SearchRequest = lazy(() => import('./pages/SearchRequest'));
-const Post = lazy(() => import('./pages/Post'));
-const TimMoiGioi = lazy(() => import('./pages/TimMoiGioi'));
+// Use lazy loading
+// const Mua = lazy(() => import('./pages/Mua'));
+// const PropertyDetails = lazy(() => import('./pages/PropertyDetails'));
+// const Thue = lazy(() => import('./pages/Thue'));
+// const Request = lazy(() => import('./pages/Request'));
+// const SearchRequest = lazy(() => import('./pages/SearchRequest'));
+// const Post = lazy(() => import('./pages/Post'));
+// const TimMoiGioi = lazy(() => import('./pages/TimMoiGioi'));
 
 export default function App() {
 
